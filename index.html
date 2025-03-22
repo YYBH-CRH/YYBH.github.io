@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>纪失+主页</title>
+    <link rel="preload" href="github-mark.png" as="image">
     <style>
         body {
             margin: 0;
@@ -115,11 +116,12 @@
         <h1>Hello, world!</h1>
         <div class="button-container">
             <button class="jump-button" id="jump-button">跳转至中转站 [<span id="countdown">10</span>]</button>
-            <a href="https://github.com">
+            <a href="https://github.com" target="_blank">
                 <button class="github-button">
                     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
                 </button>
             </a>
+            <p>Copy&nbsp;YYBH-CRH&nbsp;and&nbsp;Liaoxyu</p>
         </div>
     </div>
 <script>
@@ -172,6 +174,27 @@
             countdownElement.textContent = "彩蛋";
             window.location.href = "https://yybh.github.io"
         });
+
+        jumpButton.addEventListener("click", () => {
+            try {
+                redirect();
+            } catch (error) {
+                console.error("跳转失败:", error);
+                alert("跳转失败，请手动访问");
+            }
+        });
+        const updateGreeting = () => {
+            const hour = new Date().getHours();
+            const greetings = {
+                morning: "🌅 朝霞和理想同色，晨读与奋斗齐飞",
+                afternoon: "📚 书山有路勤为径，学海无涯苦作舟",
+                evening: "✨ 星光不问赶路人，时光不负有心人"
+            };
+        
+            document.querySelector('h1').textContent = hour < 12 ? greetings.morning : 
+                hour < 18 ? greetings.afternoon : greetings.evening;
+        }
+        setInterval(updateGreeting, 1000*60);
     </script>
 </body>
 </html>
