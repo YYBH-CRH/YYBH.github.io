@@ -14,4 +14,4 @@ My other programs: [FidoWorld](https://liaoxyucm.github.io/FidoWorld/)
 
 ### Version Info
 
-v0.0.1 The program is started
+v0.0.1 The program has been started
