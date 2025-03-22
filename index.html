@@ -80,7 +80,7 @@
             height: 22px;
             vertical-align: middle;
         }
-        :root {
+        * {
             --body-bg: white;
             --body-color: black;
             --navbar-bg: #B398D6;
@@ -115,23 +115,25 @@
         <h1>Hello, world!</h1>
         <div class="button-container">
             <button class="jump-button" id="jump-button">跳转至中转站 [<span id="countdown">10</span>]</button>
-            <button class="github-button" onclick="openLink('https://www.bing.com')">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
-            </button>
+            <a href="https://github.com">
+                <button class="github-button">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+                </button>
+            </a>
         </div>
     </div>
 <script>
-        function updateClock() {
+        const updateClock = () => {
             const now = new Date();
             document.getElementById("clock").textContent = now.toLocaleString();
         }
         setInterval(updateClock, 1000);
 
-        function toggleMode() {
+        const toggleMode = () => {
             document.body.classList.toggle("dark-mode");
         }
 
-        function checkMode() {
+        const checkMode = () => {
             const now = new Date();
             const month = now.getMonth() + 1;
             const hour = now.getHours();
@@ -143,7 +145,7 @@
             }
         }
 
-        function openLink(url) {
+        const openLink = (url) => {
             window.open(url, "_blank");
         }
 
@@ -154,21 +156,21 @@
         const countdownElement = document.getElementById("countdown");
         const jumpButton = document.getElementById("jump-button");
 
-        function updateCountdown() {
+        const updateCountdown = () => {
             countdownElement.textContent = countdown--;
             if (countdown < 0) {
                 clearInterval(interval);
                 countdownElement.textContent = "彩蛋";
-                openLink("https://yybh.github.io");
+                window.location.href = "https://yybh.github.io"
             }
         }
 
         const interval = setInterval(updateCountdown, 1000);
 
-        jumpButton.addEventListener("click", function(event) {
+        jumpButton.addEventListener("click", (event) => { /* 都什么年代了，还在用function，应该改成 "=>" 才对 */
             clearInterval(interval);
             countdownElement.textContent = "彩蛋";
-            openLink("https://yybh.github.io");
+            window.location.href = "https://yybh.github.io"
         });
     </script>
 </body>
