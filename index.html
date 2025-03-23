@@ -6,6 +6,30 @@
     <title>纪失+主页</title>
     <link rel="preload" href="github-mark.png" as="image">
     <style>
+        * {
+            --body-bg: white;
+            --body-color: black;
+            --navbar-bg: #B398D6;
+            --navbar-color: white;
+            --border-color: #80D8FF;
+            --hello-color: #87CEFA;
+            --text-shadow: 2px 2px 4px #87CEEB;
+            --button-bg: #0000FF;
+            --button-color: white;
+            --button-border: #00FFFF;
+        }
+        body.dark-mode {
+            --body-bg: #222;
+            --body-color: white;
+            --navbar-bg: #5D3975;
+            --navbar-color: white;
+            --border-color: #FFC0CB;
+            --hello-color: #FFC0CB;
+            --text-shadow: 2px 2px 4px #FFC0CB;
+            --button-bg: #87CEEB;
+            --button-color: white;
+            --button-border: #800080;
+        }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -81,30 +105,6 @@
             height: 22px;
             vertical-align: middle;
         }
-        * {
-            --body-bg: white;
-            --body-color: black;
-            --navbar-bg: #B398D6;
-            --navbar-color: white;
-            --border-color: #80D8FF;
-            --hello-color: #87CEFA;
-            --text-shadow: 2px 2px 4px #87CEEB;
-            --button-bg: #0000FF;
-            --button-color: white;
-            --button-border: #00FFFF;
-        }
-        body.dark-mode {
-            --body-bg: #222;
-            --body-color: white;
-            --navbar-bg: #5D3975;
-            --navbar-color: white;
-            --border-color: #FFC0CB;
-            --hello-color: #FFC0CB;
-            --text-shadow: 2px 2px 4px #FFC0CB;
-            --button-bg: #87CEEB;
-            --button-color: white;
-            --button-border: #800080;
-        }
     </style>
 </head>
 <body>
@@ -121,8 +121,8 @@
                     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
                 </button>
             </a>
-            <p>Copy&nbsp;YYBH-CRH&nbsp;and&nbsp;Liaoxyu</p>
         </div>
+    <p>Copy&nbsp;YYBH-CRH&nbsp;and&nbsp;Liaoxyu</p>    
     </div>
 <script>
         const updateClock = () => {
@@ -169,7 +169,7 @@
 
         const interval = setInterval(updateCountdown, 1000);
 
-        jumpButton.addEventListener("click", (event) => { /* 都什么年代了，还在用function，应该改成 "=>" 才对 */
+        jumpButton.addEventListener("click", () => { /* 都什么年代了，还在用function，应该改成 "=>" 才对 */
             clearInterval(interval);
             countdownElement.textContent = "彩蛋";
             window.location.href = "https://yybh.github.io"
@@ -185,16 +185,35 @@
         });
         const updateGreeting = () => {
             const hour = new Date().getHours();
-            const greetings = {
+            const poems = {
                 morning: "🌅 朝霞和理想同色，晨读与奋斗齐飞",
                 afternoon: "📚 书山有路勤为径，学海无涯苦作舟",
                 evening: "✨ 星光不问赶路人，时光不负有心人"
             };
+            const greetings = {
+                earlyMorning: "这么早就起床啦，客户端主机！",
+                morning: "早上好，客户端主机！",
+                lateMorning: "上午好，客户端主机",
+                noon: "中午好，客户端主机！",
+                lateNoon: "午安，客户端主机！",
+                afternoon: "下午好，客户端主机！",
+                evening: "晚上好，客户端主机！",
+                night: "夜深了，客户端主机！",
+                lateNight: "三更半夜了，客户端主机！"
+            };
         
-            document.querySelector('h1').textContent = hour < 12 ? greetings.morning : 
-                hour < 18 ? greetings.afternoon : greetings.evening;
+            document.querySelector('.content h1').textContent = (hour >= 3 & hour <= 5) ? greetings.earlyMorning : 
+                (hour >= 6 & hour <= 7) ? greetings.morning : 
+                    (hour >= 8 & hour <= 10) ? greetings.lateMorning :
+                        (hour >= 11 & hour <= 12) ? greetings.noon :
+                            (hour >= 13 & hour <= 15) ? greetings.lateNoon :
+                                (hour >= 16 & hour <= 17) ? greetings.afternoon :
+                                    (hour >= 18 & hour <= 20) ? greetings.evening :
+                                        (hour >= 21 & hour <= 23) ? greetings.night : greetings.lateNight
+            document.querySelector('h1').textContent = hour < 12 ? poems.morning : 
+                hour < 18 ? poems.afternoon : poems.evening;
         }
         setInterval(updateGreeting(), 1000*60);
-    </script>
+        </script>
 </body>
 </html>
