@@ -4,11 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>纪失+主页</title>
+    <link rel="preload" href="github-mark.png" as="image">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Product+Sans&family=Google+Sans+Display:ital@0;1&family=Google+Sans_old:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Google+Sans+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&display=swap');
+
+        * {
+            --body-bg: white;
+            --body-color: black;
+            --navbar-bg: #B398D6;
+            --navbar-color: white;
+            --border-color: #80D8FF;
+            --hello-color: #87CEFA;
+            --text-shadow: 2px 2px 4px #87CEEB;
+            --button-bg: #0000FF;
+            --button-color: white;
+            --button-border: #00FFFF;
+        }
+        body.dark-mode {
+            --body-bg: #222;
+            --body-color: white;
+            --navbar-bg: #5D3975;
+            --navbar-color: white;
+            --border-color: #FFC0CB;
+            --hello-color: #FFC0CB;
+            --text-shadow: 2px 2px 4px #FFC0CB;
+            --button-bg: #87CEEB;
+            --button-color: white;
+            --button-border: #800080;
+        }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Google Sans', Arial, sans-serif;
+            transition: .3s all ease-in-out;
             background-color: var(--body-bg);
             color: var(--body-color);
             display: flex;
@@ -63,7 +90,7 @@
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+            transition: .3s all ease-in-out;
         }
         .jump-button {
             background-color: var(--button-bg);
@@ -80,30 +107,6 @@
             height: 22px;
             vertical-align: middle;
         }
-        :root {
-            --body-bg: white;
-            --body-color: black;
-            --navbar-bg: #B398D6;
-            --navbar-color: white;
-            --border-color: #80D8FF;
-            --hello-color: #87CEFA;
-            --text-shadow: 2px 2px 4px #87CEEB;
-            --button-bg: #0000FF;
-            --button-color: white;
-            --button-border: #00FFFF;
-        }
-        body.dark-mode {
-            --body-bg: #222;
-            --body-color: white;
-            --navbar-bg: #5D3975;
-            --navbar-color: white;
-            --border-color: #FFC0CB;
-            --hello-color: #FFC0CB;
-            --text-shadow: 2px 2px 4px #FFC0CB;
-            --button-bg: #87CEEB;
-            --button-color: white;
-            --button-border: #800080;
-        }
     </style>
 </head>
 <body>
@@ -114,24 +117,27 @@
     <div class="content">
         <h1>Hello, world!</h1>
         <div class="button-container">
-            <button class="jump-button" id="jump-button">跳转至中转站 [<span id="countdown">10</span>]</button>
-            <button class="github-button" onclick="openLink('https://www.bing.com')">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
-            </button>
+            <button class="jump-button" id="jump-button">跳转至中转站 [<span id="countdown">50</span>]</button>
+            <a href="https://github.com" target="_blank">
+                <button class="github-button">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+                </button>
+            </a>
         </div>
+    <p>&copy;&nbsp;YYBH-CRH&nbsp;and&nbsp;Liaoxyu</p>    
     </div>
 <script>
-        function updateClock() {
+        const updateClock = () => {
             const now = new Date();
             document.getElementById("clock").textContent = now.toLocaleString();
         }
         setInterval(updateClock, 1000);
 
-        function toggleMode() {
+        const toggleMode = () => {
             document.body.classList.toggle("dark-mode");
         }
 
-        function checkMode() {
+        const checkMode = () => {
             const now = new Date();
             const month = now.getMonth() + 1;
             const hour = now.getHours();
@@ -143,33 +149,73 @@
             }
         }
 
-        function openLink(url) {
+        const openLink = (url) => {
             window.open(url, "_blank");
         }
 
         updateClock();
         checkMode();
 
-        let countdown = 10;
+        let countdown = 50;
         const countdownElement = document.getElementById("countdown");
         const jumpButton = document.getElementById("jump-button");
 
-        function updateCountdown() {
+        const updateCountdown = () => {
             countdownElement.textContent = countdown--;
             if (countdown < 0) {
                 clearInterval(interval);
                 countdownElement.textContent = "彩蛋";
-                openLink("https://yybh.github.io");
+                window.location.href = "https://yybh.github.io"
             }
         }
 
         const interval = setInterval(updateCountdown, 1000);
 
-        jumpButton.addEventListener("click", function(event) {
+        jumpButton.addEventListener("click", () => { /* 都什么年代了，还在用function，应该改成 "=>" 才对 */
             clearInterval(interval);
             countdownElement.textContent = "彩蛋";
-            openLink("https://yybh.github.io");
+            window.location.href = "https://yybh.github.io"
         });
-    </script>
+
+        jumpButton.addEventListener("click", () => {
+            try {
+                redirect();
+            } catch (error) {
+                console.error("跳转失败:", error);
+                alert("跳转失败，请手动访问");
+            }
+        });
+        const updateGreeting = () => {
+            const hour = new Date().getHours();
+            const poems = {
+                morning: "🌅 朝霞和理想同色，晨读与奋斗齐飞",
+                afternoon: "📚 书山有路勤为径，学海无涯苦作舟",
+                evening: "✨ 星光不问赶路人，时光不负有心人"
+            };
+            const greetings = {
+                earlyMorning: "这么早就起床啦，客户端主机！",
+                morning: "早上好，客户端主机！",
+                lateMorning: "上午好，客户端主机",
+                noon: "中午好，客户端主机！",
+                lateNoon: "午安，客户端主机！",
+                afternoon: "下午好，客户端主机！",
+                evening: "晚上好，客户端主机！",
+                night: "夜深了，客户端主机！",
+                lateNight: "三更半夜了，客户端主机！"
+            };
+        
+            document.querySelector('.content h1').textContent = (hour >= 3 & hour <= 5) ? greetings.earlyMorning : 
+                (hour >= 6 & hour <= 7) ? greetings.morning : 
+                    (hour >= 8 & hour <= 10) ? greetings.lateMorning :
+                        (hour >= 11 & hour <= 12) ? greetings.noon :
+                            (hour >= 13 & hour <= 15) ? greetings.lateNoon :
+                                (hour >= 16 & hour <= 17) ? greetings.afternoon :
+                                    (hour >= 18 & hour <= 20) ? greetings.evening :
+                                        (hour >= 21 & hour <= 23) ? greetings.night : greetings.lateNight
+            document.querySelector('h1').textContent = hour < 12 ? poems.morning : 
+                hour < 18 ? poems.afternoon : poems.evening;
+        }
+        setInterval(updateGreeting(), 1000*60);
+        </script>
 </body>
 </html>
