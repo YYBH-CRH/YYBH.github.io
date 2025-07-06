@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>纪失+主页</title>
+    <title>纪失+中转站</title>
     <style>
         body {
             margin: 0;
@@ -11,11 +11,6 @@
             transition: background-color 0.3s, color 0.3s;
             background-color: var(--body-bg);
             color: var(--body-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
         }
         .navbar {
             background-color: var(--navbar-bg);
@@ -43,133 +38,163 @@
             cursor: pointer;
         }
         .content {
-            text-align: center;
-            z-index: 1;
+            padding-top: 60px; /* 确保内容区域与导航栏之间有间距 */
         }
-        .content h1 {
-            color: var(--hello-color);
-            margin: 0;
-            text-shadow: var(--text-shadow);
+        .recommended-sites, .recommended-games, .author-tools {
+            background-color: var(--sites-bg);
+            width: 78%;
+            margin: 20px auto; /* 增加上下边距 */
+            padding: 20px;
+            border: 2px solid var(--border-color);
         }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+        .recommended-sites h2, .recommended-games h2, .author-tools h2 {
+            color: var(--sites-title-color);
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px;
         }
-        .jump-button, .github-button {
-            background-color: white;
-            border: 2px solid var(--button-border);
-            padding: 10px;
-            font-size: 16px;
+        .tools-section {
+            background-color: var(--tools-bg);
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px solid var(--border-color);
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
         }
-        .jump-button {
-            background-color: var(--button-bg);
-            color: var(--button-color);
-            padding: 10px 20px;
+        .tools-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px;
+            color: var(--tools-title-color);
         }
-        .github-button {
-            width: 42px;
-            height: 42px;
-            line-height: 22px;
-        }
-        .github-button img {
-            width: 22px;
-            height: 22px;
-            vertical-align: middle;
+        .tools-section p {
+            font-size: 14px;
+            margin: 0;
+            color: var(--tools-text-color);
         }
         :root {
             --body-bg: white;
             --body-color: black;
             --navbar-bg: #B398D6;
             --navbar-color: white;
+            --sites-bg: #E0F7FA;
+            --sites-title-color: #B398D6;
+            --tools-bg: rgba(179, 152, 214, 0.5);
+            --tools-title-color: #D32F2F;
+            --tools-text-color: #D32F2F;
             --border-color: #80D8FF;
-            --hello-color: #87CEFA;
-            --text-shadow: 2px 2px 4px #87CEEB;
-            --button-bg: #0000FF;
-            --button-color: white;
-            --button-border: #00FFFF;
         }
         body.dark-mode {
             --body-bg: #222;
             --body-color: white;
             --navbar-bg: #5D3975;
             --navbar-color: white;
+            --sites-bg: #333;
+            --sites-title-color: white;
+            --tools-bg: #333;
+            --tools-title-color: #F0F0F0;
+            --tools-text-color: #F0F0F0;
             --border-color: #FFC0CB;
-            --hello-color: #FFC0CB;
-            --text-shadow: 2px 2px 4px #FFC0CB;
-            --button-bg: #87CEEB;
-            --button-color: white;
-            --button-border: #800080;
         }
     </style>
 </head>
 <body>
-<nav class="navbar">
-        <h1>纪失+主页</h1>
+    <nav class="navbar">
+        <h1>纪失+中转站</h1>
         <div class="clock" id="clock" onclick="toggleMode()">点击切换模式</div>
     </nav>
     <div class="content">
-        <h1>Hello, world!</h1>
-        <div class="button-container">
-            <button class="jump-button" id="jump-button">跳转至中转站 [<span id="countdown">10</span>]</button>
-            <button class="github-button" onclick="openLink('https://www.bing.com')">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
-            </button>
+        <div class="recommended-sites">
+            <h2>推荐网站</h2>
+            <div class="tools-section" onclick="window.open('https://www.jyshare.com/')">
+                <h3>菜鸟工具</h3>
+                <p>提供丰富的在线工具，涵盖编程、设计、学习等多个领域。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://math.microsoft.com/zh')">
+                <h3>微软数学</h3>
+                <p>数学求解器，提供数学问题的分步解释和图形化展示。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://www.kuaishou.cn/')">
+                <h3>快手</h3>
+                <p>短视频社交平台，拥有海量的有趣内容。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://github.com/')">
+                <h3>GitHub</h3>
+                <p>代码托管平台，支持开源项目和团队协作。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://www.deepseek.com/')">
+                <h3>DeepSeek</h3>
+                <p>智能搜索平台，提供精准的信息检索和知识发现服务。</p>
+            </div>
         </div>
+        <div class="recommended-games">
+            <h2>推荐页游</h2>
+            <div class="tools-section" onclick="window.open('https://www.poki.com/')">
+                <h3>Poki</h3>
+                <p>知名在线游戏平台，提供丰富多样的小游戏。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://games.imc.re/')">
+                <h3>IMC</h3>
+                <p>集成多种热门小游戏的平台，包括经典MC网页版本。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://www.4399.com/')">
+                <h3>4399</h3>
+                <p>经典中文网页游戏平台，提供丰富的休闲和竞技游戏。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://www.kongregate.com/')">
+                <h3>Kongregate</h3>
+                <p>国际知名的网页游戏平台，提供多种类型的游戏。</p>
+            </div>
+            <div class="tools-section" onclick="window.open('https://www.y8.com/')">
+                <h3>Y8</h3>
+                <p>流行的网页游戏平台，提供多种类型的游戏。</p>
+            </div>
+        </div>
+        <div class="author-tools">
+            <h2>作者工具</h2>
+            <div class="tools-section" onclick="window.open('https://kuaishou.cn/profile/3x4tdin2qk3fidg')">
+                <h3>作品集</h3>
+                <p>点击跳转至作者的作品集。</p>
+            </div>
+           <div class="tools-section" onclick="window.open('https://github.com/YYBH-CRH/YYBH.github.io/')">
+                <h3>源码</h3>
+                <p>点击跳转至GitHub。</p>
+            </div>
+            <div class="tools-section" onclick="alert('快手搜 纪失YYBH\n我是一名 MC玩家')">
+                <h3>联系邮箱</h3>
+                <p>网易邮箱：ltfh_yybh@163.com，微软邮箱：ltfh_yybh@outlook.com，但作者一般不看邮件。</p>
+            </div>
     </div>
-<script>
+    <script>
         function updateClock() {
             const now = new Date();
-            document.getElementById("clock").textContent = now.toLocaleString();
+            const formattedTime = now.toLocaleString();
+            document.getElementById("clock").textContent = formattedTime;
         }
         setInterval(updateClock, 1000);
-
         function toggleMode() {
             document.body.classList.toggle("dark-mode");
         }
-
         function checkMode() {
             const now = new Date();
             const month = now.getMonth() + 1;
             const hour = now.getHours();
             const isSummerOrAutumn = month >= 6 && month <= 11;
-            if (isSummerOrAutumn && (hour >= 6 && hour < 7) || (!isSummerOrAutumn && (hour >= 18 || hour < 7))) {
-                document.body.classList.add("dark-mode");
+            if (isSummerOrAutumn) {
+                if (hour >= 6 && hour < 7) {
+                    document.body.classList.add("dark-mode");
+                } else {
+                    document.body.classList.remove("dark-mode");
+                }
             } else {
-                document.body.classList.remove("dark-mode");
+                if (hour >= 18 || hour < 7) {
+                    document.body.classList.add("dark-mode");
+                } else {
+                    document.body.classList.remove("dark-mode");
+                }
             }
         }
-
-        function openLink(url) {
-            window.open(url, "_blank");
-        }
-
         updateClock();
         checkMode();
-
-        let countdown = 10;
-        const countdownElement = document.getElementById("countdown");
-        const jumpButton = document.getElementById("jump-button");
-
-        function updateCountdown() {
-            countdownElement.textContent = countdown--;
-            if (countdown < 0) {
-                clearInterval(interval);
-                countdownElement.textContent = "彩蛋";
-                openLink("https://yybh.github.io");
-            }
-        }
-
-        const interval = setInterval(updateCountdown, 1000);
-
-        jumpButton.addEventListener("click", function(event) {
-            clearInterval(interval);
-            countdownElement.textContent = "彩蛋";
-            openLink("https://yybh.github.io");
-        });
     </script>
 </body>
 </html>
